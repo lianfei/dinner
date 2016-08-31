@@ -26,8 +26,9 @@ public class SerializeObject {
         try {
             if (filepath != null && !filepath.equals("")) {
                 file = new File(filepath.toString());
+                boolean mkdirok = true;
                 if (!file.getParentFile().exists()) {
-                    file.getParentFile().mkdir();
+                    mkdirok = file.getParentFile().mkdirs();
                 }
                 if (!file.exists()) {
                     file.createNewFile();
