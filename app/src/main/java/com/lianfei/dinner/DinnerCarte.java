@@ -268,6 +268,20 @@ public class DinnerCarte implements Serializable {
                 list_index.add(index);
             }
         }
+        if (list_index.size() == 0) {
+            int len = name.length();
+            int size = len - 1;
+            String temp_name = name.substring(0,size);
+            while ((size > 0) && (size >= len / 2) && list_index.size() == 0) {
+                for (int index = 0; index < list_dinnerfoods.size();++index){
+                    if (list_dinnerfoods.get(index).GetFoodName().indexOf(temp_name) != -1) {
+                        list_index.add(index);
+                    }
+                }
+                size--;
+                temp_name = temp_name.substring(0,size);
+            }
+        }
         return list_index;
     }
 

@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -126,9 +127,21 @@ public class DinnerTableGridView {
                             public void onClick(DialogInterface dialog, int which) {
                                 if (!et.getText().toString().equals("")) {
                                     int tableindex = Integer.valueOf (et.getText().toString()).intValue();
-                                    DinnerTable table = new DinnerTable(tableindex);
-                                    list_dinnertable.add(table);
-                                    adapter.NotifyUpdate(-1);
+                                    boolean found = false;
+                                    for (int index = 0; index < list_dinnertable.size(); ++index) {
+                                        if (list_dinnertable.get(index).GetDinnerTableId() == tableindex) {
+                                            found = true;
+                                            break;
+                                        }
+                                    }
+                                    if (!found) {
+                                        DinnerTable table = new DinnerTable(tableindex);
+                                        list_dinnertable.add(table);
+                                        adapter.NotifyUpdate(-1);
+                                    } else {
+                                        Toast.makeText(context, "桌号已经存在", Toast.LENGTH_SHORT).show();
+                                    }
+
                                 }
                             }
                         })
