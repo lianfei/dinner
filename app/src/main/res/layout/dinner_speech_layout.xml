@@ -59,13 +59,14 @@
         android:gravity="top|left"
         android:paddingBottom="20dp"
         android:textSize="20sp"
+        android:scrollbars="vertical"
         />
 
     <Button
         android:id="@+id/iat_recognize"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="开始"
+        android:text="长按点菜"
         android:textSize="20sp"
         />
 

@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -230,6 +231,50 @@ public class DinnerCarte implements Serializable {
         return str;
     }
 
+    public LinkedHashMap<String, Integer> GetCurrentDinnerInfo(int tableindex) {
+        LinkedHashMap<String,Integer> name2number = new LinkedHashMap<>();
+        if (map_tableid_numbers != null) {
+            List<Integer> listnumber = map_tableid_numbers.get(tableindex);
+            if (listnumber != null) {
+                for (int index = 0; index < listnumber.size(); ++index) {
+                    if (listnumber.get(index).intValue() > 0) {
+                        name2number.put(list_dinnerfoods.get(index).GetFoodName(),listnumber.get(index).intValue());
+                    }
+                }
+            }
+        }
+        return name2number;
+    }
+
+    public List<Integer> GetCurrentFoodIndexs(int tableindex) {
+        List<Integer> foodindex = new ArrayList<>();
+        if (map_tableid_numbers != null) {
+            List<Integer> listnumber = map_tableid_numbers.get(tableindex);
+            if (listnumber != null) {
+                for (int index = 0; index < listnumber.size(); ++index) {
+                    if (listnumber.get(index).intValue() > 0) {
+                        foodindex.add(index);
+                    }
+                }
+            }
+        }
+        return foodindex;
+    }
+
+    public String GetFoodNameByIndex(int tableindex, int index) {
+        return list_dinnerfoods.get(index).GetFoodName();
+    }
+
+    public int GetFoodNumberByIndex(int tableindex,int index) {
+        if (map_tableid_numbers != null) {
+            List<Integer> listnumber = map_tableid_numbers.get(tableindex);
+            if (listnumber != null) {
+                return listnumber.get(index).intValue();
+            }
+        }
+        return 0;
+    }
+
     public void DinnerOrder(int tableindex, String type, int position, int number) {
         List<Integer> listnumber = map_tableid_numbers.get(tableindex);
         List<DinnerFood> dinnerfoods = map_type_dinnerfoods.get(type);
@@ -243,6 +288,15 @@ public class DinnerCarte implements Serializable {
                     listnumber.set(newpos,number);
                 }
             }
+        }
+    }
+
+    public void DinnerOrder(int tableindex, int index, int number) {
+        List<Integer> listnumber = map_tableid_numbers.get(tableindex);
+        if (listnumber != null) {
+            if (number < 0)  number = 0;
+            if (number >= 1000)  number = 999;
+            listnumber.set(index,number);
         }
     }
 
