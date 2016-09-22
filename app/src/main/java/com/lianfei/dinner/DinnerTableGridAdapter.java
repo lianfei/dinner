@@ -109,7 +109,7 @@ public class DinnerTableGridAdapter extends BaseAdapter {
         return convertView;
     }
 
-    private void FillValue(final int position, ViewHolder viewHolder, View convertView) {
+    private void FillValue(final int position, ViewHolder viewHolder, final View convertView) {
         viewHolder.textview_table_index.setText(String.valueOf(list_dinnertable.get(position).GetDinnerTableId()));
         viewHolder.button_dinner.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,7 +138,11 @@ public class DinnerTableGridAdapter extends BaseAdapter {
         viewHolder.button_speech.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context,"语音点餐",Toast.LENGTH_SHORT).show();
+                // 启动一个新的activity
+                Intent intent = new Intent(context,DinnerSpeechActivity.class);
+                // DinnerCarte id
+                intent.putExtra(DinnerCarte.DINNERTABLE_ID_KEY,list_dinnertable.get(position).GetDinnerTableId());
+                context.startActivity(intent);
                 Log.d(TAG,"语音点餐");
             }
         });
