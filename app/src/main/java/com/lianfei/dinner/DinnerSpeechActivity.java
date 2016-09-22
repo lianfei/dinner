@@ -116,7 +116,7 @@ public class DinnerSpeechActivity extends AppCompatActivity{
         @Override
         public void onResult(RecognizerResult recognizerResult, boolean b) {
             recognizeResult(getResult(recognizerResult));
-            recognizeResult("西红柿，羊肉串10个");
+            // recognizeResult("西红柿，羊肉串10个");
         }
 
         @Override
@@ -149,7 +149,7 @@ public class DinnerSpeechActivity extends AppCompatActivity{
         public void onResult(RecognizerResult recognizerResult, boolean isLast) {
             Log.d(TAG, recognizerResult.getResultString());
             recognizeResult(getResult(recognizerResult));
-            recognizeResult("西红柿，羊肉串10个");
+            // recognizeResult("西红柿，羊肉串10个");
             if (isLast) {
                 // TODO 最后的结果
             }
@@ -335,6 +335,12 @@ public class DinnerSpeechActivity extends AppCompatActivity{
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         final int foodindex = list_relative.get(position);
                         int number = map_name2number.get(name).intValue();
+                        if (number == 0) {
+                            number = dinnercarte.GetFoodNumberByIndex(dinnertable_id,foodindex);
+                            if (number == 0) {
+                                number = 1;
+                            }
+                        }
                         String foodname = dinnercarte.GetFoodNameByIndex(dinnertable_id,foodindex);
                         // 构建一个新的Dialog获取item number
                         AlertDialog.Builder dialog_builder = new AlertDialog.Builder(DinnerSpeechActivity.this);

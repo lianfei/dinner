@@ -136,7 +136,7 @@ public class UtilTools {
             boolean getnumber = false;
             String str_name = "";
             String str_num = "";
-            int num = 1;
+            int num = 0;
             for (int index = 0; index < str.length(); ++index) {
                 if (str.charAt(index) < '0' || str.charAt(index) > '9') {
                     // 非数字
