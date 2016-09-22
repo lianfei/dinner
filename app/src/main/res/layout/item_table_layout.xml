@@ -34,7 +34,15 @@
             android:textColor="@color/color_table_index"
             android:gravity="center"
             />
-
+        <ImageButton
+            android:layout_height="30dp"
+            android:layout_width="30dp"
+            android:id="@+id/item_dinner_speech"
+            android:gravity="center"
+            android:background="@mipmap/is"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            />
     </LinearLayout>
 
     <LinearLayout

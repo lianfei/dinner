@@ -8,7 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -133,6 +135,13 @@ public class DinnerTableGridAdapter extends BaseAdapter {
                 Log.d(TAG,"老板，" + list_dinnertable.get(position).GetDinnerTableId()  + "号台结账了！");
             }
         });
+        viewHolder.button_speech.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context,"语音点餐",Toast.LENGTH_SHORT).show();
+                Log.d(TAG,"语音点餐");
+            }
+        });
         if (position == current_checkitem) {
             viewHolder.textview_table_index.setTextColor(context.getResources().getColor(R.color.red));
             convertView.setBackgroundResource(R.drawable.check_bg);
@@ -146,11 +155,13 @@ public class DinnerTableGridAdapter extends BaseAdapter {
         TextView textview_table_index = null;
         Button button_dinner = null;
         Button button_account = null;
+        ImageButton button_speech = null;
 
         ViewHolder(View view) {
             textview_table_index = (TextView)view.findViewById(R.id.item_table_index);
             button_dinner = (Button)view.findViewById(R.id.dinner_start);
             button_account = (Button)view.findViewById(R.id.dinner_account);
+            button_speech = (ImageButton)view.findViewById(R.id.item_dinner_speech);
         }
     }
 }
