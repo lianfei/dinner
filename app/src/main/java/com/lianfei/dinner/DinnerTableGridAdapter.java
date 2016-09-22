@@ -138,6 +138,8 @@ public class DinnerTableGridAdapter extends BaseAdapter {
         viewHolder.button_speech.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // 预定一桌，指定index
+                dinnercarte.DinnerStart(list_dinnertable.get(position).GetDinnerTableId());
                 // 启动一个新的activity
                 Intent intent = new Intent(context,DinnerSpeechActivity.class);
                 // DinnerCarte id

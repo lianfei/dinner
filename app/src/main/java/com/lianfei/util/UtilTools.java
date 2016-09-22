@@ -1,6 +1,7 @@
 package com.lianfei.util;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
@@ -128,5 +129,46 @@ public class UtilTools {
             }
         }
         return ret_str;
+    }
+
+    public static void recogString(HashMap<String,Integer> map,String str) {
+        if (map != null && str != null) {
+            boolean getnumber = false;
+            String str_name = "";
+            String str_num = "";
+            int num = 1;
+            for (int index = 0; index < str.length(); ++index) {
+                if (str.charAt(index) < '0' || str.charAt(index) > '9') {
+                    // 非数字
+                    str_name += str.charAt(index);
+                } else {
+                    for (int subindex = index; subindex < str.length();++subindex) {
+                        if (str.charAt(subindex) >= '0' && str.charAt(subindex) <= '9') {
+                            str_num += str.charAt(subindex);
+                        } else {
+                            break;
+                        }
+                    }
+                    getnumber = true;
+                }
+                if (getnumber)
+                    break;
+            }
+            if (!str_name.equals("")) {
+                if (!str_num.equals("")) {
+                    num = Integer.parseInt(str_num);
+                }
+                map.put(str_name,num);
+            }
+        }
+    }
+
+    public static HashMap<String,Integer> splitRecog(String str_recog) {
+        HashMap<String,Integer> map_name_number = new LinkedHashMap<>();
+        String [] strs = str_recog.split("、|，|。|；|？|！|,|\\.|;|\\?|!|]");
+        for (int index = 0; index < strs.length;++index) {
+            recogString(map_name_number,strs[index]);
+        }
+        return map_name_number;
     }
 }

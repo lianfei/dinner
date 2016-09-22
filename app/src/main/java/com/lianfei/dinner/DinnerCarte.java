@@ -261,6 +261,16 @@ public class DinnerCarte implements Serializable {
         return foodindex;
     }
 
+    public List<Integer> GetRelativeFoodIndex(String name) {
+        List<Integer> list_index = new ArrayList<>();
+        for (int index = 0; index < list_dinnerfoods.size();++index){
+            if (list_dinnerfoods.get(index).GetFoodName().startsWith(name)) {
+                list_index.add(index);
+            }
+        }
+        return list_index;
+    }
+
     public String GetFoodNameByIndex(int tableindex, int index) {
         return list_dinnerfoods.get(index).GetFoodName();
     }
